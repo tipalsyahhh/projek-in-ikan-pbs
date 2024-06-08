@@ -1,0 +1,96 @@
+.induk {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.hal-1 {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.card-quis {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-quis img{
+    width: 100%;
+}
+
+.card-quis-2 {
+    width: 30%;
+    margin-left: 16px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-quis-2 img{
+    width: 100%;
+}
+
+.card-quis-3 {
+    width: 30%;
+    margin-left: 36px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-quis-3 img{
+    width: 100%;
+}
+
+.text {
+    width: 100%;
+    padding: 20px;
+}
+
+.lanjut {
+    border-radius: 20px;
+    background: linear-gradient(270deg, #9055fd 0%, #c4a5fe 100%);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 45px;
+    transition: transform 80ms ease-in;
+}
+
+.lanjut:hover {
+    color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+    .induk {
+        width: 100%;
+        margin-bottom: 0;
+        padding: 20px;
+    }
+
+    .hal-1 {
+        display: block;
+    }
+
+    .card-quis {
+        width: 100%;
+        margin-bottom: 20px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .card-quis-2 {
+        width: 100%;
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+
+    .card-quis-3 {
+        width: 100%;
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+}

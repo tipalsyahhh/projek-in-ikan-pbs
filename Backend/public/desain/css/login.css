@@ -1,0 +1,206 @@
+body {
+	background-image: url('../../../img/1.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+	background-color: #f2f2f2;
+}
+
+.container {
+	margin-top: 0;
+}
+
+.card-header {
+	font-size: 1.3rem;
+}
+
+.card-body h4 {
+	font-weight: bold;
+	margin-top: 20px;
+	font-size: 30px;
+	color: #fff;
+	margin-bottom: 48px;
+}
+
+.card {
+	display: flex;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(4.6px);
+	-webkit-backdrop-filter: blur(4.6px);
+	border: 1px solid rgba(255, 255, 255, 0.87);
+	width: 50%;
+	height: 530px;
+	margin: 0 auto;
+	border-radius: 80px 0 0 80px;
+	padding: 7px;
+	opacity: 0;
+	animation: fadeIn 1s forwards, borderRadiusAnimation 4s infinite;
+}
+
+.card-regis {
+	display: flex;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(4.6px);
+	-webkit-backdrop-filter: blur(4.6px);
+	border: 1px solid rgba(255, 255, 255, 0.87);
+	width: 50%;
+	height: 520px;
+	margin: 0 auto;
+	border-radius: 80px 0 0 80px;
+	padding: 7px;
+	opacity: 0;
+	animation: fadeIn 1s forwards, borderRadiusAnimation 4s infinite;
+}
+
+.text-api h6{
+	font-weight: bold;
+	margin-top: 15px;
+	color: #fff;
+}
+
+.google button{
+	background: transparent;
+	border: none;
+	margin-top: 8px;
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	cursor: pointer;
+}
+
+.google img{
+	width: 100%;
+}
+
+.form-control{
+	border-radius: 50px;
+}
+
+@keyframes borderRadiusAnimation {
+	0%, 100% {
+		border-radius: 95px 0 95px 0;
+	}
+	50% {
+		border-radius: 0 95px 0 95px;
+	}
+}
+
+@keyframes fadeIn {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes logoAnimation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+#loginText {
+	height: 40px;
+	display: inline-block;
+	overflow: hidden;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.login-link {
+	color: #ffff;
+	text-decoration: none;
+	transition: color 0.3s, border-bottom-color 0.3s;
+	border-bottom: 1px solid transparent;
+	text-decoration: none;
+}
+
+.login-link:hover {
+	color: #ffff;
+}
+
+.btn-login {
+	display: block;
+	width: 100%;
+	margin-top: 40px;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.btn-regis {
+	display: block;
+	width: 100%;
+	margin-top: 40px;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #333;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: none;
+	border-radius: 50px;
+	font-weight: bold;
+}
+
+.form-group {
+	position: relative;
+	margin-bottom: 25px;
+}
+
+.form-login {
+	border: none;
+	border-bottom: 2px solid #ccc;
+	background: transparent;
+	border-radius: 0;
+	padding: 10px;
+	width: 100%;
+	transition: border-color 0.3s ease;
+}
+
+.form-login:focus {
+	outline: none;
+	border-color: #EEE0C9;
+	background: transparent;
+}
+
+.input-label {
+	position: absolute;
+	left: 10px;
+	top: 0;
+	pointer-events: none;
+	transition: 0.3s ease all;
+	color: #EEE0C9;
+}
+
+.form-login:focus + .input-label,
+.form-login:not(:placeholder-shown) + .input-label {
+	top: -20px;
+	font-size: 15px;
+	color: #EEE0C9;
+}
+
+@media (max-width: 768px) {
+	.card,
+	.card-regis {
+		width: 94%;
+	}
+}

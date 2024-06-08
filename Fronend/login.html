@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="icon" href="img/koi.png" type="image/png">
+</head>
+
+<body data-csrf-token="{{ csrf_token() }}">
+    <div class="container">
+        <div class="content">
+            <div class="from-login">
+                <center>
+                    <div id="passwordError" style="display: none; color: red;"></div>
+                    <div id="emailError" style="display: none; color: red;"></div>
+
+                    <h3>Welcome to In-ikan</h3>
+                    <form id="loginByEmailForm">
+                        <div class="username">
+                            <i class="bi bi-person-fill"></i>
+                            <div class="batas-input"></div>
+                            <input type="text" id="name" name="name" placeholder="Username" required>
+                        </div><br>
+                        <div class="password">
+                            <i class="bi bi-lock-fill"></i>
+                            <div class="batas-input"></div>
+                            <input type="password" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="button-login">Login</button>
+                    </form>
+                </center>
+                <button class="forgot">Forgot password?</button>
+                <center>
+                    <button class="button-register" onclick="toggleForms()">
+                        <p>If you don't have an account then <span>register firs!</span></p>
+                    </button>
+                </center>
+                <div class="garis">
+                    <div class="garis-1"></div>
+                    <p>or</p>
+                    <div class="garis-1"></div>
+                </div>
+                <center>
+                    <button class="button-google" id="btnGoogle">
+                        <p>Sign up with Google</p>
+                        <img src="img/google.png" alt="image" class="img-google">
+                    </button>
+                </center>
+            </div>
+            <div class="from-register hidden">
+                <center>
+                    <h3>Register Hire</h3>
+                    <form id="google-login-form" action="http://localhost:8000/login-by-google" method="POST">
+                        <input type="hidden" name="_token" id="csrf-token" value="">
+                        <input type="text" name="name" placeholder="Name" required><br><br>
+                        <input type="email" name="email" placeholder="Email" required><br><br>
+                        <input type="password" name="password" placeholder="Password" required><br><br>
+                        <button class="button-submit" type="submit">Register</button>
+                    </form>
+                    <center>
+                        <button class="return-login" onclick="returnToLogin()">
+                            <p>Return to the login page</p>
+                        </button>
+                    </center>
+                </center>
+            </div>
+            <div class="img-in-ikan">
+                <center>
+                    <img src="img/koi.png" alt="image">
+                </center>
+            </div>
+        </div>
+    </div>
+    <script src="js/login.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { GoogleAuthProvider, getAuth, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsML9tjRuQnrZ6UR6P_tLZH9F4VjcEg3I",
+            authDomain: "chat-21312071.firebaseapp.com",
+            projectId: "chat-21312071",
+            storageBucket: "chat-21312071.appspot.com",
+            messagingSenderId: "526045960009",
+            appId: "1:526045960009:web:682b9d888941a16d712c98",
+            measurementId: "G-TFD2BMLJM8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+
+        document.querySelector('#btnGoogle').addEventListener('click', function (e) {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    const user = result.user;
+
+                    let tokenCSRF = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                        url: 'http://localhost:8000/login-by-google',
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': tokenCSRF,
+                        },
+                        data: {
+                            uid: user.uid,
+                            name: user.displayName,
+                            email: user.email,
+                        },
+                        success: function (data) {
+                            console.log('Success:', data);
+                            window.location.href = data.redirect;
+                        },
+                        error: function (err) {
+                            console.log('Error:', err);
+                        }
+                    });
+
+                }).catch((error) => {
+                    console.log('Error:', error);
+                });
+        });
+        $(document).ready(function () {
+            $('#google-login-form').on('submit', function (event) {
+                event.preventDefault();
+                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                var name = $('#google-login-form input[name="name"]').val();
+                var email = $('#google-login-form input[name="email"]').val();
+                var password = $('#google-login-form input[name="password"]').val();
+
+                fetch('http://localhost:8000/login-by-google', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        password: password
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            alert('Anda berhasil membuat akun!');
+                            window.location.href = 'http://localhost/frontend/login.html';
+                        } else {
+                            alert('Login failed. Please try again.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again later.');
+                    });
+            });
+
+            $('#loginByEmailForm').on('submit', function (event) {
+                event.preventDefault();
+
+                var name = $('#name').val();
+                var password = $('#password').val();
+                var csrfToken = $('#csrf_token').val(); 
+                
+                if (!name || !password) {
+                    alert('Nama dan kata sandi harus diisi.');
+                    return;
+                }
+
+                $.ajax({
+                    url: 'http://localhost:8000/login-by-form',
+                    method: 'POST',
+                    data: {
+                        name: name,
+                        password: password,
+                        _token: csrfToken
+                    },
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            window.location.href = response.redirect;
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error: ' + status + error);
+                        alert('An error occurred while processing your request. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
