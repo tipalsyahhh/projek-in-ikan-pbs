@@ -14,6 +14,11 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'login-by-google',
         'login-by-form',
+        'logout',
+        'user-chart',
+        'data',
+        'data/*',
+        'data/[0-9]+',
         '/another-route',
         '/yet-another-route',
     ];

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'login-by-google', 'login-by-form'],
+    'paths' => ['api/*', 'login-by-google', 'login-by-form', 'logout', 'user-chart', 'data', 'data/*', 'data/[0-9]+'],
     'allowed_methods' => ['*'],
     'allowed_origins' => ['http://localhost'],
     'allowed_headers' => ['*'],

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
 
 class UserController extends BaseController
-{   
+{
     public function loginByGoogle(Request $request)
     {
         $name = $request->input('name');
@@ -18,9 +18,9 @@ class UserController extends BaseController
         $uid = $request->input('uid');
         $password = $request->input('password');
         $remember_token = Str::random(60);
-        
+
         $user = User::where('name', $name)->first();
-    
+
         if (!$user) {
 
             $user = User::create([
@@ -31,7 +31,7 @@ class UserController extends BaseController
                 'remember_token' => $remember_token,
             ]);
             Auth::login($user);
-    
+
             return response()->json([
                 'status' => 'success',
                 'redirect' => URL::to('/frontend/login.html')
@@ -42,78 +42,89 @@ class UserController extends BaseController
             $user->password = bcrypt($uid);
             $user->save();
         }
-    
+
         Auth::login($user);
-    
+
         if ($user->role === 'admin') {
             return response()->json([
                 'status' => 'success',
-                'redirect' => URL::to('/frontend/admin/admin.html')
+                'redirect' => 'http://localhost/frontend/admin/admin.html'
             ])->header('Access-Control-Allow-Origin', '*');
         }
-    
+
         return response()->json([
             'status' => 'success',
-            'redirect' => URL::to('/frontend/home.html')
+            'redirect' => URL::to('http://localhost/frontend/home.html'),
+            'user' => [
+                'name' => $user->name
+            ]
         ])->header('Access-Control-Allow-Origin', '*');
     }
-    
+
     public function loginfrom(Request $request)
     {
         $name = $request->input('name');
         $password = $request->input('password');
-    
+
         if (!$name || !$password) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Nama dan kata sandi harus diisi.'
-            ])->header('Access-Control-Allow-Origin', '*');
+            ]);
         }
-    
+
         $user = User::where('name', $name)->first();
-    
+
         if (!$user) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Nama pengguna tidak ditemukan.'
-            ])->header('Access-Control-Allow-Origin', '*');
+            ]);
         }
-    
+
         if (!Hash::check($password, $user->password)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Kata sandi salah.'
-            ])->header('Access-Control-Allow-Origin', '*');
+            ]);
         }
-        $user->save();
-    
+
         Auth::login($user);
-    
-        $redirectUrl = '/frontend/home.html';
+
+        $redirectPath = '/frontend/home.html';
         if ($user->role === 'admin') {
-            $redirectUrl = '/frontend/admin/admin.html';
+            $redirectPath = '/frontend/admin/admin.html';
         }
+
+        return response()->json([
+            'status' => 'success',
+            'redirect' => 'http://localhost' . $redirectPath,
+            'user' => [
+                'name' => $user->name
+            ]
+        ]);
+    }
+
+    public function userChart()
+    {
+        $monthlyUsers = User::selectRaw('MONTH(created_at) as month, COUNT(*) as total_users')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+    
+        return response()->json($monthlyUsers);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     
         return response()->json([
             'status' => 'success',
-            'redirect' => URL::to($redirectUrl)
+            'redirect' => URL::to('http://localhost/frontend/login.html')
         ])->header('Access-Control-Allow-Origin', '*');
     }
     
-    // public function userChart()
-    // {
-    //     $monthlySales = User::selectRaw('MONTH(created_at) as month, COUNT(DISTINCT user) as total_users')
-    //         ->groupBy('month')
-    //         ->orderBy('month')
-    //         ->get();
-
-    //     return response()->json($monthlySales);
-    // }
-
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('login');
-    }
 }

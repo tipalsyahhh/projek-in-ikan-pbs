@@ -1,0 +1,525 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.wadah {
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.isi-fiture {
+  background-color: rgb(233, 233, 233);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 3;
+  position: relative;
+}
+
+.isi-welcome {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+}
+
+.img-welcome {
+  height: 400px;
+}
+
+#typing-text {
+  position: relative;
+  min-height: 25px;
+  font-size: 20px;
+  color: #000;
+}
+
+#typing-text::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.isi-atas {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.isi-atas a {
+  padding: 20px;
+  position: relative;
+}
+
+
+a #notification-counts {
+  position: absolute;
+  z-index: 1;
+  right: 5px;
+  top: 0;
+  font-size: 13px;
+  background-color: red;
+  height: 16px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.isi-bawah {
+  margin-bottom: 50px;
+}
+
+.user-chat {
+  flex: 1;
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
+  font-size: 15px;
+  position: relative;
+  padding: 10px;
+  font-family: acme, sans-serif;
+}
+
+.data-item {
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.144);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.isi-data p {
+  margin-top: -10px;
+}
+
+.ini-button {
+  margin-left: auto;
+}
+
+.edit-button,
+.delete-button {
+  margin-right: 5px;
+  border: none;
+  background-color: #52b3d9;
+  color: #fff;
+  height: 30px;
+  width: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.edit-button i,
+.delete-button i {
+  font-size: 15px;
+}
+
+.menu-user {
+  width: calc(100%-20px);
+  overflow-y: auto;
+  max-height: 100vh;
+  overflow-x: hidden;
+  padding: 10px;
+}
+
+.tambah {
+  padding: 10px;
+}
+
+.button-tambah {
+  border: 1px solid #000;
+  background-color: #fff;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.144);
+  height: 30px;
+  width: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.ini-user,
+.ini-user-2 {
+  display: flex;
+  height: 40px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ini-user:hover,
+.ini-user-2:hover {
+  background-color: rgb(233, 233, 233);
+  overflow: hidden;
+}
+
+.foto {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.isi-chat {
+  flex: 3;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.judul-chat {
+  height: 50px;
+  padding: 10px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #333232;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.judul-isi {
+  display: flex;
+  align-items: center;
+}
+
+.fungsi {
+  margin-left: auto;
+}
+
+.call {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgb(233, 233, 233);
+  border: none;
+  font-size: 18px;
+  color: #333;
+}
+
+.cari {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-left: 5px;
+  margin-top: 2px;
+  border: none;
+  font-size: 18px;
+  color: #333;
+}
+
+.room-chat {
+  font-size: 13px;
+  width: 100%;
+}
+
+.isi-massage {
+  height: calc(100vh - 90px - 85px);
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.massage {
+  color: #fff;
+  background-color: rgb(49, 50, 51);
+  width: fit-content;
+  min-width: 100px;
+  max-width: 300px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.user-massage {
+  color: #fff;
+  background-color: #52b3d9;
+  display: block;
+  margin-left: auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  width: fit-content;
+  min-width: 100px;
+  max-width: 50%;
+}
+
+.massage p,
+.user-massage p {
+  margin-left: 4px;
+}
+
+.from-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  padding: 10px;
+  max-height: 45px;
+}
+
+.button-user {
+  flex: 1;
+  background-color: rgb(233, 233, 233);
+  align-items: center;
+  display: flex;
+  border-radius: 50px;
+}
+
+.enter {
+  border-radius: 50px;
+  background-color: rgb(233, 233, 233);
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: none;
+  color: #333232;
+}
+
+
+.enter:focus {
+  border: none;
+  outline: none;
+}
+
+.kirim-mobile {
+  display: none;
+}
+
+.emot,
+.link,
+.kirim {
+  border: none;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(233, 233, 233);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 10px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 130px;
+  position: fixed;
+  z-index: 1000;
+  right: 20px;
+  bottom: 60px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  height: 35px;
+  border-radius: 10px;
+  padding-left: 10px;
+  gap: 10px;
+  background-color: rgb(233, 233, 233);
+}
+
+.search-box {
+  flex: 1;
+  padding: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+  background-color: rgb(233, 233, 233);
+
+}
+
+.search-box:focus {
+  border: none;
+  outline: none;
+}
+
+.menu-mobile {
+  display: none;
+}
+
+.close-chat {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .isi-fiture {
+    display: none;
+  }
+
+  .user-chat.show-isi-chat {
+    display: none;
+  }
+
+  .welcome {
+    display: none;
+  }
+
+  .isi-chat {
+    display: none;
+  }
+
+  .user-massage {
+    margin-top: 10px;
+    max-width: 60%;
+  }
+
+  .from-input {
+    margin-left: 5px;
+  }
+
+  .button-user {
+    flex: 1;
+  }
+
+  .tombol {
+    width: auto;
+  }
+
+  .emot,
+  .link,
+  .kirim {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+  }
+
+  .kirim {
+    display: none;
+  }
+
+  .enter {
+    width: 90%;
+  }
+
+  .kirim-mobile {
+    display: block;
+    margin-right: 5px;
+    border: none;
+    background-color: rgb(233, 233, 233);
+    font-size: 20px;
+    color: #333;
+  }
+
+  .call {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cari {
+    width: 30px;
+    height: 30px;
+    margin-left: 0;
+    margin-top: 2px;
+  }
+
+  .menu-mobile {
+    position: fixed;
+    bottom: 0;
+    height: 65px;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .icon-mobile {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .home-mobile {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #52b3d9;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gaya-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #52b3d9;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .gaya-home i {
+    color: #fff;
+    font-size: 22px;
+  }
+
+  .isi-mobile {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .close-chat {
+    display: block;
+    color: #000;
+    border: none;
+    margin-right: 8px;
+    font-size: 20px;
+    background-color: #fff;
+  }
+}

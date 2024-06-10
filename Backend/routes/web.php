@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,8 @@ Route::get('/api/csrf-token', function() {
 Route::post('/login-by-form', [UserController::class, 'loginFrom'])->name('login.by.form');
 
 Route::post('/login-by-google', [UserController::class, 'loginByGoogle'])->name('login.by.google');
-//route logout
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
+Route::get('/user-chart', [UserController::class, 'userChart']);
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::resource('/data', DataController::class);
 //rute chatgpt
 Route::post('/scnd-chat', [ChatController::class, 'scndChat'])->name('scnd-chat');

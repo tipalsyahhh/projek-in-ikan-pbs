@@ -16,9 +16,7 @@
         <div class="content">
             <div class="from-login">
                 <center>
-                    <div id="passwordError" style="display: none; color: red;"></div>
-                    <div id="emailError" style="display: none; color: red;"></div>
-
+                    <div id="errorDiv"></div>
                     <h3>Welcome to In-ikan</h3>
                     <form id="loginByEmailForm">
                         <div class="username">
@@ -171,10 +169,10 @@
 
                 var name = $('#name').val();
                 var password = $('#password').val();
-                var csrfToken = $('#csrf_token').val(); 
-                
+                var csrfToken = $('#csrf_token').val();
+
                 if (!name || !password) {
-                    alert('Nama dan kata sandi harus diisi.');
+                    $('#errorDiv').html('<div class="alert alert-danger">Nama dan kata sandi harus diisi.</div>');
                     return;
                 }
 
@@ -190,12 +188,12 @@
                         if (response.status === 'success') {
                             window.location.href = response.redirect;
                         } else {
-                            alert(response.message);
+                            $('#errorDiv').html('<div class="alert alert-danger">' + response.message + '</div>');
                         }
                     },
                     error: function (xhr, status, error) {
                         console.error('AJAX Error: ' + status + error);
-                        alert('An error occurred while processing your request. Please try again.');
+                        $('#errorDiv').html('<div class="alert alert-danger">Terjadi kesalahan saat memproses permintaan Anda. Silakan coba lagi.</div>');
                     }
                 });
             });
